@@ -1,4 +1,68 @@
-# Python
+# =========================
+# .NET / C#
+# =========================
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+
+## .NET Core
+project.lock.json
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio
+.vs/
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+launchSettings.json
+
+## Rider
+.idea/
+
+## User secrets
+secrets.json
+
+# =========================
+# Node.js / Frontend
+# =========================
+node_modules/
+.next/
+out/
+dist/
+.turbo/
+*.tsbuildinfo
+.env.local
+.env.*.local
+
+# =========================
+# Python (legacy)
+# =========================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -9,17 +73,32 @@ env/
 ENV/
 .venv
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-
+# =========================
 # Database
+# =========================
 *.db
 *.sqlite
 *.sqlite3
 
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+*.swp
+*.swo
+*~
+
+# =========================
 # OS
+# =========================
 .DS_Store
 Thumbs.db
+ehthumbs.db
+
+# =========================
+# Secrets & Credentials
+# =========================
+*.pfx
+*.key
+*.pem
+appsettings.*.local.json
