@@ -3,8 +3,10 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from ecommerce.database import init_db
+from ecommerce.settings import settings
 from ecommerce.users.api import router as users_router
 from ecommerce.products.api import router as products_router
 from ecommerce.products.api import categories_router
@@ -25,6 +27,15 @@ app = FastAPI(
     description="A simple e-commerce backend demonstrating monolithic architecture",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Register all routers
