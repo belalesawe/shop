@@ -1,25 +1,33 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-ENV/
-.venv
+# Dependencies
+node_modules/
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
+# Build output
+dist/
+
+# Environment
+.env
 
 # Database
 *.db
 *.sqlite
 *.sqlite3
 
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Test coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo
