@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: ecommerce
+      POSTGRES_DB: ecommerce
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecommerce"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../
+      dockerfile: docker/backend.Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://ecommerce:ecommerce@postgres:5432/ecommerce
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      CORS_ORIGINS: '["http://localhost:3000"]'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  # Frontend service placeholder - uncomment and configure when
+  # frontend code is available in the same repository.
+  # frontend:
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: ../docker/frontend.Dockerfile
+  #   environment:
+  #     NEXT_PUBLIC_API_URL: http://backend:8000
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "3000:3000"
+
+volumes:
+  pgdata:
