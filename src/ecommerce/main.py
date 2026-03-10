@@ -1,17 +1,17 @@
-"""FastAPI application - E-commerce monolith."""
+"""FastAPI application - E-commerce API."""
 
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from ecommerce.config import get_settings
 from ecommerce.database import init_db
-from ecommerce.users.api import router as users_router
-from ecommerce.products.api import router as products_router
-from ecommerce.products.api import categories_router
-from ecommerce.orders.api import router as orders_router
-from ecommerce.inventory.api import router as inventory_router
-from ecommerce.reports.api import router as reports_router
-from ecommerce.reports.api import views_router as reports_views_router
+from ecommerce.users.router import router as users_router
+from ecommerce.products.router import router as products_router
+from ecommerce.products.router import categories_router
+from ecommerce.orders.router import router as orders_router
+from ecommerce.inventory.router import router as inventory_router
+from ecommerce.reports.router import router as reports_router
 
 
 @asynccontextmanager
@@ -21,9 +21,11 @@ async def lifespan(app: FastAPI):
     yield
 
 
+settings = get_settings()
+
 app = FastAPI(
-    title="E-commerce Monolith",
-    description="A simple e-commerce backend demonstrating monolithic architecture",
+    title=settings.app_title,
+    description="E-commerce REST API",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -35,10 +37,9 @@ app.include_router(products_router)
 app.include_router(orders_router)
 app.include_router(inventory_router)
 app.include_router(reports_router)
-app.include_router(reports_views_router)
 
 
 @app.get("/")
 async def root():
     """Health check endpoint."""
-    return {"status": "healthy", "service": "ecommerce-monolith"}
+    return {"status": "healthy", "service": "ecommerce-api"}
