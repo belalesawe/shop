@@ -1,21 +1,13 @@
-"""All database models - monolithic design with shared models."""
+"""Re-export all database models for centralized metadata discovery."""
 
+from ecommerce.users.models import User  # noqa: F401
+
+# Models not yet split into domain files — will be moved in subsequent milestones
 from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 
 from sqlmodel import Field, SQLModel
-
-
-class User(SQLModel, table=True):
-    """User account."""
-
-    __tablename__ = "users"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    email: str = Field(unique=True, index=True)
-    name: str
-    created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class Category(SQLModel, table=True):
