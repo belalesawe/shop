@@ -1,4 +1,9 @@
-"""All database models - monolithic design with shared models."""
+"""All database models — re-exports from domain modules.
+
+This module ensures all table classes are imported before
+SQLModel.metadata.create_all runs, and provides a single
+import location for convenience.
+"""
 
 from datetime import datetime
 from decimal import Decimal
@@ -6,16 +11,8 @@ from typing import Optional
 
 from sqlmodel import Field, SQLModel
 
-
-class User(SQLModel, table=True):
-    """User account."""
-
-    __tablename__ = "users"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    email: str = Field(unique=True, index=True)
-    name: str
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+# Re-export from domain modules
+from ecommerce.users.models import User  # noqa: F401
 
 
 class Category(SQLModel, table=True):
