@@ -20,6 +20,12 @@ ENV/
 *.sqlite
 *.sqlite3
 
+# Environment
+.env
+
+# Testing
+.pytest_cache/
+
 # OS
 .DS_Store
 Thumbs.db
