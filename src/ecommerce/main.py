@@ -6,8 +6,8 @@ from fastapi import FastAPI
 
 from ecommerce.database import init_db
 from ecommerce.users.router import router as users_router
-from ecommerce.products.api import router as products_router
-from ecommerce.products.api import categories_router
+from ecommerce.products.router import router as products_router
+from ecommerce.products.router import categories_router
 from ecommerce.orders.api import router as orders_router
 from ecommerce.inventory.api import router as inventory_router
 from ecommerce.reports.api import router as reports_router

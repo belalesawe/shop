@@ -1,6 +1,8 @@
 """Re-export all database models for centralized metadata discovery."""
 
 from ecommerce.users.models import User  # noqa: F401
+from ecommerce.products.models import Category, Product  # noqa: F401
+from ecommerce.inventory.models import Inventory  # noqa: F401
 
 # Models not yet split into domain files — will be moved in subsequent milestones
 from datetime import datetime
@@ -8,40 +10,6 @@ from decimal import Decimal
 from typing import Optional
 
 from sqlmodel import Field, SQLModel
-
-
-class Category(SQLModel, table=True):
-    """Product category."""
-
-    __tablename__ = "categories"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str = Field(unique=True)
-    description: Optional[str] = None
-
-
-class Product(SQLModel, table=True):
-    """Product in catalog."""
-
-    __tablename__ = "products"
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    description: Optional[str] = None
-    price: Decimal = Field(decimal_places=2)
-    category_id: Optional[int] = Field(default=None, foreign_key="categories.id")
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-
-
-class Inventory(SQLModel, table=True):
-    """Product inventory tracking."""
-
-    __tablename__ = "inventory"
-
-    product_id: int = Field(foreign_key="products.id", primary_key=True)
-    quantity: int = Field(default=0)
-    reserved: int = Field(default=0)
-    last_updated: datetime = Field(default_factory=datetime.utcnow)
 
 
 class Order(SQLModel, table=True):
